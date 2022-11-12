@@ -14,7 +14,9 @@ body{
     align-items: center;
 }
 
-#intro{
+
+/* designing the intro section/ what users will see when they first open app */
+#intro, #questions-form{
     background-color: rgb(251, 254, 251);
     font-size: 20px;
     padding:3rem;
@@ -59,7 +61,7 @@ li{
 }
 
 #highscore-list{
-    font-size: 35px;
+    font-size: 40px;
     cursor: pointer;
     display: inline-block;
     position: relative;
@@ -84,20 +86,33 @@ li{
 }
 
 #timer{
-    margin-left: 4.5em;
+    font-size: 50px;
     display: none;
-
-
+    position:absolute;
+    top: 60px;
+    float: left;
+    justify-content: center;
 }
 
+/* design style for question box */
 #questions-form{
-    
+    font-size: 40px;
     display: none;
 }
 
+.q-buttons{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    gap:30px
+
+}
+
+.q-buttons button{
+    font-size: 40px;
+}
 
 
-#end{
+#end, #return{
     
     display: none;
 }
