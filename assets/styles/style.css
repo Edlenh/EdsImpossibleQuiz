@@ -1,0 +1,31 @@
+*{
+    text-align: center;
+}
+body{
+    background: gray;
+    font-size: 25px;
+}
+
+
+#timer{
+    width: 100px;  
+    margin: 50px auto;
+    display: none;
+
+}
+
+
+
+#questions-form{
+    display: none;
+}
+
+
+
+
+
+
+#end{
+    
+    display: none;
+}
