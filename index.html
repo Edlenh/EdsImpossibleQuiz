@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImpossibleQuiz</title>
     <link rel="stylesheet" href="assets/styles/style.css">
-    <link rel="stylesheet" href="assets\styles\fonts\stylesheet.css">  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&family=Sono&family=Syne+Mono&display=swap" rel="stylesheet">
@@ -67,9 +66,19 @@
             
 
 <section id="end">
+    
+<form id="endForm">
+    <input
+    input type="text"
+    name="username"
+    id="username"
+    placeholder="Place Initials"
+    />
+    <button type="submit" id="saveScore" onclick="saveHighScore(event)">Save</button>
+</form>
 
-    <!-- You reached the end! 
-    You're final score is:  -->
+<a class="homeBtn" href="index.html">Main Menu</a>
+    
 
 </section>
 

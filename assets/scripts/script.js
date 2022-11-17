@@ -15,9 +15,39 @@ var correctScore= 100
 
 //initialize start menu buttons and nav. 
 var startButton = document.getElementById("start");
-var ruleButton =document.getElementById('rules-tab')
+var ruleButton = document.getElementById('rules-tab')
 var scoreButton= document.getElementById('highscore-list')
 
+//highscore cut off list
+const MAX_HSCORES =5;
+
+//create ending page buttons and local storage functions. 
+const highScores =JSON.parse(localStorage.getItem("highScores")) || [];
+const mostRecentScore =localStorage.getItem('mostRecentScore')
+var endPage = document.getElementById("endForm")
+var username = document.getElementById("username")
+var saveScore =document.getElementById("saveScore")
+
+username.addEventListener("keyup", ()=>{
+  saveScore.disabled =!username.value;
+})
+
+saveHighScore=(e)=>{
+  e.preventDefault();
+  console.log("clicked the save buttonn")
+
+  const score ={
+    score:mostRecentScore,
+    name:username.value
+  };
+  highScores.push(score)
+  //sort scores by total, highest to least
+  highScores.sort((a,b) =>b.score-a.score)
+
+  //only push up to 5 highscores
+  highScores.splice(5)
+  console.log(highScores);
+}
 
 //creating question array 
 var availableQuestions= []
@@ -156,13 +186,19 @@ function gameEnd(){
   questionBoxEl.style.display="none"
   endEl.style.display="block"
   endEl.innerHTML="You're final score is " + score;
+  endEl.appendChild(endPage)
+
 }
 
 
 //create function to set next question
 function getNewQuestion(){
   if(availableQuestions.length === 0 || questionCounter > numQuestions) {
+    localStorage.setItem('mostRecentScore', score)
     gameEnd()
+    //included return to break out of the for loop, before i was getting an error. 
+    return
+    
   }
  questionCounter ++
  //randomize which question comes up
@@ -177,12 +213,14 @@ function getNewQuestion(){
 
   //remove question from available question array
   availableQuestions.splice(questionsIndex, 1)
-
+  acceptingAnswers=true
 }
 
 choices.forEach(choice => {
   choice.addEventListener('click', event => {
     
+
+    acceptingAnswers=false
     //assign each answer as a target when clicked
       const selectedChoice = event.target
       const selectedAnswer = selectedChoice.dataset['number']
@@ -197,9 +235,14 @@ choices.forEach(choice => {
       }
 
       selectedChoice.parentElement.classList.add(answerCorrect)
-      getNewQuestion()
-  })
+      setTimeout(() => {
+        selectedChoice.parentElement.classList.remove(answerCorrect)
+        getNewQuestion()
+
+    },100)
 })
+})
+      
 
 addScore = num => {
   score +=num

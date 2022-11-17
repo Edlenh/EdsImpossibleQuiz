@@ -171,7 +171,7 @@ li{
 /* design style for question box */
 
 #question{
-    font-size: 20px;
+    font-size: 25px;
     color:white
 }
 #question-box{
@@ -187,7 +187,7 @@ li{
 
 #timer, #score{
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     display: none;
     text-align: center;
     padding-left: 212px;
@@ -222,12 +222,44 @@ li{
     font-size: 50px;
 }
 
-
-/* .correct {
-    background: #000000
-  
+#end button{
+    font-size: larger;
+    color:#db26d5a2 ;
+    width: 20rem;
+    font-size: 1.8rem ;
+    border-radius: 10px;
+    border-color: #db26d5a2;
 }
 
-.incorrect {
-    background: red
-} */
+#end button:hover{
+    cursor: pointer;
+    transform: scale(1.10);
+    transform: 100ms;
+}
+
+
+form{
+    padding-top: 5rem;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input{
+    border-color: #fff;
+    margin-bottom: 1rem;
+    width: 20rem;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    border-radius: 10px;
+    border-color: #db26d5a2;
+}
+
+input::placeholder{
+    color:#db26d5a2
+}
+
+input, select, textarea{
+    color:#db26d5a2
+}
