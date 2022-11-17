@@ -6,39 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImpossibleQuiz</title>
     <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets\styles\fonts\stylesheet.css">  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&family=Sono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&family=Sono&family=Syne+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     
+<header id="header">Ed's ?mpossible Quiz</header>
+
+
 <main id="intro">
-    <h1>Welcome to Ed's impossible quiz</h1>
-    <ul>
-    <li id="start">Start Quiz</li>
-    <li id="highscore-list">See highscores</li>
+    <h1 id="intro-title">Ready?</h1>
+    <ul">
+    <li id="start">Game Start &#10148;</li>
+    <li id="rules-tab">Rules &#9888;</li>
+    <li id="highscore-list">Highscores &#8795;</li>
     </ul>
     
 </main>
 
-<div id="timer"></div>
 
-<section id="questions-form">
-    <div id="questions-container">
-        <div id="question">Question</div>
-        <div id="answer" class="q-buttons">
-            <button class="button">Answer 1 </button>
-            <button class="button">Answer 2 </button>
-            <button class="button">Answer 3 </button>
-            <button class="button">Answer 4 </button>
-            
-            
-        </div>
-    </div>
+
+<section id="ruleset">
+    <ol id="rules">
+        <li>You have 60 seconds to finish the quiz</li>
+        <li>After the time is up your score will be recorded</li>
+        <li>Incorrect answers will result in a loss of 5 seconds</li>
+        <li> <a href="index.html"> Main Menu</a> </li>
+    </ol>
+
 </section>
 
-<!-- <div id="timer"></div> -->
 
+
+<section id="highscores">
+    <p id="scores">Here are the highscores </p>
+    <a href="index.html"> Main Menu</a> 
+</section>
+
+
+
+
+<div id="question-container">
+    <div id="question-box">
+      <div id="question">Question</div>
+      <div id="timer"></div>
+      <div id="score"></div>
+      <div id="answer-buttons" class="answers">
+        <button class="choice" data-number="1">Answer 1</button>
+        <button class="choice" data-number="2">Answer 2</button>
+        <button class="choice" data-number="3">Answer 3</button>
+        <button class="choice" data-number="4">Answer 4</button>
+      </div>
+    </div>
+
+</div>
+          
+            
+            
 
 <section id="end">
 

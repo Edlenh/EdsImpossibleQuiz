@@ -4,7 +4,7 @@
     font-family: 'Sono', sans-serif;
 }
 body{
-    background-color:rgb(251, 251, 242);
+    background-color: #000000;
     padding: 0;
     margin: 0;
     display: flex;
@@ -12,17 +12,43 @@ body{
     height: 100vh;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
+
+
+#header{
+    font-family: 'Syne Mono', monospace;
+    position: fixed;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    top: 0;
+    padding: 13rem 0;
+    font-size: 55px;
+    transform: skew(-5deg,7deg);
+    cursor: default;
+}
+
 
 
 /* designing the intro section/ what users will see when they first open app */
-#intro, #questions-form{
-    background-color: rgb(251, 254, 251);
+
+
+
+#intro, #ruleset, #highscores{
+    background-color: #1a1a1a;
     font-size: 20px;
-    padding:3rem;
-    box-shadow: 0 5px 6px 3px grey
+    padding:8rem 11rem;
+    box-shadow: 0 1px 18px 9px #db26d5a2;
+    border-color: #db26d5a2;
+   
 }
 
+#intro-title{
+    font-size: 45px;
+    font-family: 'Syne Mono', monospace;
+    color: #db26d5a2;
+}
 
 li{
     display: flex;
@@ -34,12 +60,13 @@ li{
     clear:left;
     line-height: 1.9em;
 }
-#start{
-    font-size: 40px;
+#start, #rules-tab, #highscore-list{
+    
+    font-size: 50px;
     cursor: pointer;
     display: inline-block;
     position: relative;
-    color: #126b3ac6;
+    color: #39FF14;
     
 }
 
@@ -51,7 +78,7 @@ li{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #126b3a5e;
+    background-color: #39FF14;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out
 }
@@ -60,12 +87,50 @@ li{
     transform-origin: bottom left;
 }
 
+/* style rule set elements */
+#ruleset{
+    display: none;
+}
+#rules-tab{
+    color: #14a5ff;
+}
+#rules-tab::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #14a5ff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out
+}
+#rules-tab:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+#rules{
+    font-size: 30px;
+    color:white;
+    display: block;
+}
+
+#rules li a{
+    text-decoration: none;
+    color: #ff1818;
+    padding-left: 345px;
+    
+   
+}
+
+
+
+
+/* style high score elements */
 #highscore-list{
-    font-size: 40px;
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    color:#940a2fa2
+    color:#ff1818;
 }
 
 #highscore-list::after{
@@ -76,7 +141,7 @@ li{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #940a2fa2;
+    background-color: #ff1818;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out
 }
@@ -84,35 +149,77 @@ li{
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
-#timer{
-    font-size: 50px;
+#highscores{
+    font-size: 30px;
+    color:white;
     display: none;
-    position:absolute;
-    top: 60px;
-    float: left;
-    justify-content: center;
 }
+
+#highscores a{
+    text-decoration: none;
+    color: #ff1818;
+    padding-left: 345px;
+   text-align: center;
+}
+
+
+#intro-title{
+    color:white
+}
+
 
 /* design style for question box */
-#questions-form{
-    font-size: 40px;
-    display: none;
-}
 
-.q-buttons{
+#question{
+    font-size: 20px;
+    color:white
+}
+#question-box{
+    font-size: 30px;
+    display: none;
+    width: 800px;
+    max-width: 80%;
+    border-radius: 5px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+#timer, #score{
+    color: white;
+    font-size: 20px;
+    display: none;
+    text-align: center;
+    padding-left: 212px;
+    margin-top: 20px;
+}
+.answers{
     display: grid;
     grid-template-columns: repeat(2,auto);
-    gap:30px
-
+    margin:200px 0;
+    gap:20px;
 }
 
-.q-buttons button{
-    font-size: 40px;
+.choice{
+    font-size: 30px;
+    border-radius: 25px;
+    padding:30px 10px;
+    gap: 40px;
+    color:white;
+    outline: none;
+    background-color:#db26d5a2; 
 }
-
+.choice:hover{
+    cursor: pointer;
+    border: 3px solid #fff;
+    transform: scale(1.10);
+    transform: 100ms;
+}
 
 #end, #return{
-    
+    color: white;
     display: none;
+    font-size: 50px;
 }
+
+

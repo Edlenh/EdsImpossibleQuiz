@@ -1,24 +1,136 @@
 var timerEl = document.getElementById("timer");
-var homeEl = document.getElementById("return")
-var questionsEl = document.getElementById('question')
-var answersEl = document.getElementById('answers')
+var homeEl = document.getElementById("return");
+var endEl= document.getElementById("end")
+var questionBoxEl = document.getElementById('question-box')
+var question =document.getElementById('question')
+var answersEl = document.getElementById('answer-buttons')
+var scoreEl = document.getElementById('score')
+const choices = Array.from(document.querySelectorAll('.choice'));
+var numQuestions= 6
+//set index of questions, default is 0
+var currentQuestion ={}
 var counter = 0;
+var score = 0;
+var correctScore= 100
+
+//initialize start menu buttons and nav. 
 var startButton = document.getElementById("start");
+var ruleButton =document.getElementById('rules-tab')
+var scoreButton= document.getElementById('highscore-list')
 
 
+//creating question array 
+var availableQuestions= []
+let questionCounter=0
+let questions =[
+  {
+      question: 'Which boxer is the only one to win world titles in eight different divisions?',
+      
+           choice1: 'Floyd Mayweather Jr', 
+           choice2: 'Manny Pacquiao', 
+           choice3: 'Mike Tyson', 
+           choice4: 'Miguel Cotto',
+           
+      
+  },
 
+  {
+    question: "Which Photographer is famous for black and white photos at Yosemite National Park?",
+    
+       choice1: 'Ansel Adams', 
+       choice2: 'Dorothea Lange', 
+       choice3: 'André Kertész ', 
+       choice4: 'Annie Leibovitz', 
+      
+    
+  },
+  {
+    question: 'Who won the Superbowl in the 2021-2022 season?',
+   
+       choice1: 'Seattle Seahawks', 
+       choice2: 'New England Patriots', 
+       choice3: 'Kansas City Chiefs', 
+       choice4: 'Los Angeles Rams', 
+       answer:4,
+    
+  },
+  {
+    question: 'What year did the first Star Wars movie come out?',
+    
+       choice1: '1976', 
+       choice2: '1977', 
+       choice3: '1975', 
+       choice4: '1980', 
+       answer:2,
+    
+  },
+  {
+    question: 'Which of these movie directors specializes in horror?',
+    
+       choice1:'Wes Anderson',
+       choice2: 'George Lucas', 
+       choice3: 'George A Romero', 
+       choice4: 'Nora Ephron', 
+       answer:3,
+    
+  },
+  
+  {
+      question: 'A dog sweats through which part of its body?',
+      
+        choice1: 'Paws', 
+        choice2: 'Mouth', 
+        choice3: 'Ears', 
+        choice4: 'Nose',
+        anwser:1, 
+      
+    }
+]
+
+//start game on click
 startButton.addEventListener("click", function(){
-    timerEl.style.display="flex"
-    document.getElementById("questions-form").style.display="block"
-    document.getElementById("intro").style.display='none'
-    document.getElementById("start").style.display="none"
-    startTimer();
-    nextQuestion();
+  timerEl.style.display="flex"
+  questionBoxEl.style.display="block"
+  document.getElementById("intro").style.display="none"
+  document.getElementById("start").style.display="none"
+  document.getElementById("header").style.display="none"
+    startQuiz();
+   
 })
+
+//show rules on click 
+ruleButton.addEventListener("click", function(){
+    document.getElementById("intro").style.display="none"
+    document.getElementById("ruleset").style.display="block"
+    document.getElementById("header").style.display="none"
+
+})
+
+//show highscores on click
+scoreButton.addEventListener("click", function(){
+  document.getElementById("intro").style.display="none"
+  document.getElementById("highscores").style.display="block"
+  document.getElementById("header").style.display="none"
+})
+
+
+
+//create start function
+function startQuiz(){
+  
+    startTimer();
+    questionCounter=0
+    score=0
+    availableQuestions =[...questions]
+    getNewQuestion()
+}
+
 
 //create timer function
 function startTimer(){
-timerEl.innerHTML="Time: "+ 60
+timerEl.innerHTML="Time: "+ 60;
+scoreEl.innerHTML="Score: "+ 0;
+scoreEl.style.display="flex"
 var timedOut= setInterval(function(){
     timerEl.innerHTML="Time: "+ (60 - counter)
     counter++;
@@ -26,43 +138,71 @@ var timedOut= setInterval(function(){
     if (counter > 50) {
         timerEl.style.color = "red";
         }
+    //when timer hits 0 clear out the timer and question box
+    //calculate score 
     if(counter >= 61){
-        clearInterval(timedOut);
-        document.getElementById('end').style.display="block"
-        startButton.style.display="none"
-        timerEl.style.display="none"
-        homeEl.style.display="block"
-        document.getElementById("questions-form").style.display="none"
+      gameEnd()
     }
 },1000)
 }
 
-
-//creating question array 
-const questions =[
-    {
-        question: 'What is ?',
-        answers: [
-            { text: '1', correct: true },
-            { text: '2', correct: false },
-            { text: '3', correct: false},
-            { text: '4', correct: false},
-        ]
-    }
-]
-
-//creating function to show question
-
-function listQuestions(question){
-    questionsEl.innerHTML= questions.questions
+//create function for end of game
+function gameEnd(){
+  startButton.style.display="none"
+  timerEl.style.display="none"
+  homeEl.style.display="block"
+  questionBoxEl.style.display="none"
+  endEl.style.display="block"
 }
 
-function nextQuestion(){
-    listQuestions(questions)
+
+//create function to set next question
+function getNewQuestion(){
+  if(availableQuestions.length === 0 || questionCounter > numQuestions) {
+    gameEnd()
+  }
+ questionCounter ++
+ const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    currentQuestion = availableQuestions[questionsIndex]
+    question.innerText = currentQuestion.question
+
+    choices.forEach(choice => {
+      const number = choice.dataset['number']
+      choice.innerText = currentQuestion['choice' + number]
+  })
+
+  availableQuestions.splice(questionsIndex, 1)
+
+  acceptingAnswers = true
+
 }
 
-//create function for starting quiz
-// function startQuiz(){
-    
-//     startTimer()
+// choices.forEach(choice => {
+//   choice.addEventListener('click', event => {
+//       if(!acceptingAnswers) return
+
+//       acceptingAnswers = false
+//       const selectedChoice = event.target
+//       const selectedAnswer = selectedChoice.dataset['number']
+
+//       let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+//     //   if(classToApply === 'correct') {
+//     //     incrementScore(correctScore)
+//     // }
+//       selectedChoice.parentElement.classList.add(classToApply)
+
+//       setTimeout(() => {
+//           selectedChoice.parentElement.classList.remove(classToApply)
+//           getNewQuestion()
+
+//       }, 1000)
+//   })
+// })
+
+// incrementScore = num => {
+//   score +=num
+//   scoreEl.innerText = score
 // }
+
+
+
