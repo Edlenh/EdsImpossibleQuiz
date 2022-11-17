@@ -6,6 +6,8 @@ var question =document.getElementById('question')
 var answersEl = document.getElementById('answer-buttons')
 var scoreEl = document.getElementById('score')
 const choices = Array.from(document.querySelectorAll('.choice'));
+const finalScore = document.getElementById('finalScore')
+const mostRecentScore = localStorage.getItem('mostRecentScore')
 var numQuestions= 6
 //set index of questions, default is 0
 var currentQuestion ={}
@@ -22,19 +24,20 @@ var scoreButton= document.getElementById('highscore-list')
 const MAX_HSCORES =5;
 
 //create ending page buttons and local storage functions. 
+// finalScore.innerText = mostRecentScore
 const highScores =JSON.parse(localStorage.getItem("highScores")) || [];
-const mostRecentScore =localStorage.getItem('mostRecentScore')
+
 var endPage = document.getElementById("endForm")
 var username = document.getElementById("username")
-var saveScore =document.getElementById("saveScore")
+const saveScore =document.getElementById("saveScore")
 
 username.addEventListener("keyup", ()=>{
   saveScore.disabled =!username.value;
 })
 
-saveHighScore=(e)=>{
+saveHighScore= e=> {
   e.preventDefault();
-  console.log("clicked the save buttonn")
+
 
   const score ={
     score:mostRecentScore,
@@ -46,8 +49,19 @@ saveHighScore=(e)=>{
 
   //only push up to 5 highscores
   highScores.splice(5)
+
+  //save scores into local storage
+  localStorage.setItem("highScores", JSON.stringify(highScores));
   console.log(highScores);
+  window.location.assign('/')
 }
+
+
+
+//create function to append highscores to html 
+
+
+
 
 //creating question array 
 var availableQuestions= []
@@ -140,9 +154,8 @@ ruleButton.addEventListener("click", function(){
 
 //show highscores on click
 scoreButton.addEventListener("click", function(){
-  document.getElementById("intro").style.display="none"
-  document.getElementById("highscores").style.display="block"
-  document.getElementById("header").style.display="none"
+  window.location.href = "scores.html";
+
 })
 
 

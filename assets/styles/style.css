@@ -35,7 +35,7 @@ body{
 
 
 
-#intro, #ruleset, #highscores{
+#intro, #ruleset, #scorePage{
     background-color: #1a1a1a;
     font-size: 20px;
     padding:8rem 11rem;
@@ -262,4 +262,16 @@ input::placeholder{
 
 input, select, textarea{
     color:#db26d5a2
+}
+
+#finalScore{
+    color:white
+}
+#highScoresList{
+    color:white
+}
+
+#scorePage a{
+    float: left;
+    margin-top: 30px;
 }
