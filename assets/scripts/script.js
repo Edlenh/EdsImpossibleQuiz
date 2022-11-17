@@ -24,12 +24,13 @@ var availableQuestions= []
 let questionCounter=0
 let questions =[
   {
-      question: 'Which boxer is the only one to win world titles in eight different divisions?',
-      
+      question: 'Which of the following boxers is the only one to win world titles in eight different divisions?',
+        
            choice1: 'Floyd Mayweather Jr', 
            choice2: 'Manny Pacquiao', 
            choice3: 'Mike Tyson', 
            choice4: 'Miguel Cotto',
+           answer: 2,
            
       
   },
@@ -41,6 +42,7 @@ let questions =[
        choice2: 'Dorothea Lange', 
        choice3: 'André Kertész ', 
        choice4: 'Annie Leibovitz', 
+       answer: 1,
       
     
   },
@@ -49,9 +51,9 @@ let questions =[
    
        choice1: 'Seattle Seahawks', 
        choice2: 'New England Patriots', 
-       choice3: 'Kansas City Chiefs', 
+       choice3: 'Kansas City Chiefs',
        choice4: 'Los Angeles Rams', 
-       answer:4,
+       answer: 4,
     
   },
   {
@@ -61,7 +63,7 @@ let questions =[
        choice2: '1977', 
        choice3: '1975', 
        choice4: '1980', 
-       answer:2,
+      answer: 2,
     
   },
   {
@@ -71,7 +73,7 @@ let questions =[
        choice2: 'George Lucas', 
        choice3: 'George A Romero', 
        choice4: 'Nora Ephron', 
-       answer:3,
+       answer: 3,
     
   },
   
@@ -79,10 +81,10 @@ let questions =[
       question: 'A dog sweats through which part of its body?',
       
         choice1: 'Paws', 
-        choice2: 'Mouth', 
+        choice2: 'Mouth',
         choice3: 'Ears', 
         choice4: 'Nose',
-        anwser:1, 
+        answer:1,
       
     }
 ]
@@ -153,6 +155,7 @@ function gameEnd(){
   homeEl.style.display="block"
   questionBoxEl.style.display="none"
   endEl.style.display="block"
+  endEl.innerHTML="You're final score is " + score;
 }
 
 
@@ -162,47 +165,46 @@ function getNewQuestion(){
     gameEnd()
   }
  questionCounter ++
+ //randomize which question comes up
  const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
-
+  //appending the answer into the answer boxes
     choices.forEach(choice => {
       const number = choice.dataset['number']
       choice.innerText = currentQuestion['choice' + number]
   })
 
+  //remove question from available question array
   availableQuestions.splice(questionsIndex, 1)
-
-  acceptingAnswers = true
 
 }
 
-// choices.forEach(choice => {
-//   choice.addEventListener('click', event => {
-//       if(!acceptingAnswers) return
+choices.forEach(choice => {
+  choice.addEventListener('click', event => {
+    
+    //assign each answer as a target when clicked
+      const selectedChoice = event.target
+      const selectedAnswer = selectedChoice.dataset['number']
+      
+      let answerCorrect = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
 
-//       acceptingAnswers = false
-//       const selectedChoice = event.target
-//       const selectedAnswer = selectedChoice.dataset['number']
+      if(answerCorrect === 'correct') {
+          addScore(correctScore)
+      }
+      else{
+        counter+=5;
+      }
 
-//       let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
-//     //   if(classToApply === 'correct') {
-//     //     incrementScore(correctScore)
-//     // }
-//       selectedChoice.parentElement.classList.add(classToApply)
+      selectedChoice.parentElement.classList.add(answerCorrect)
+      getNewQuestion()
+  })
+})
 
-//       setTimeout(() => {
-//           selectedChoice.parentElement.classList.remove(classToApply)
-//           getNewQuestion()
-
-//       }, 1000)
-//   })
-// })
-
-// incrementScore = num => {
-//   score +=num
-//   scoreEl.innerText = score
-// }
+addScore = num => {
+  score +=num
+  scoreEl.innerText = "Score:" + score
+}
 
 
 

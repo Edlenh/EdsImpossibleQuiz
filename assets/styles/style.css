@@ -216,10 +216,18 @@ li{
     transform: 100ms;
 }
 
-#end, #return{
+#end{
     color: white;
     display: none;
     font-size: 50px;
 }
 
 
+/* .correct {
+    background: #000000
+  
+}
+
+.incorrect {
+    background: red
+} */
