@@ -12,7 +12,7 @@ var numQuestions= 6
 //set index of questions, default is 0
 var currentQuestion ={}
 var counter = 0;
-var score = 0;
+// var score = 0;
 var correctScore= 100
 
 //initialize start menu buttons and nav. 
